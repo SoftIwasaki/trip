@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>家族で楽しむ飛騨・高山大冒険！</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(45deg, #ff6b9d, #c44569, #f8b500, #e55039);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            min-height: 100vh;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 107, 157, 0.1), transparent);
+            animation: sparkle 3s linear infinite;
+        }
+        
+        @keyframes sparkle {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            color: #e55039;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .family-info {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            color: white;
+            padding: 20px;
+            border-radius: 20px;
+            margin: 20px 0;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .family-info h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+        
+        .family-members {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .family-member {
+            text-align: center;
+            animation: bounce 2s infinite;
+        }
+        
+        .family-member:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+        
+        .family-member:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
+        .member-icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        
+        .countdown-section {
+            background: linear-gradient(135deg, #ff6b9d, #c44569);
+            color: white;
+            padding: 30px;
+            border-radius: 25px;
+            text-align: center;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .countdown-unit {
+            background: rgba(255,255,255,0.2);
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+            min-width: 80px;
+        }
+        
+        .countdown-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: block;
+        }
+        
+        .countdown-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .progress-bar {
+            background: rgba(255,255,255,0.3);
+            border-radius: 15px;
+            height: 25px;
+            margin: 20px 0;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(90deg, #27ae60, #2ecc71, #f1c40f, #e67e22);
+            height: 100%;
+            width: 0%;
+            transition: width 0.8s ease;
+            border-radius: 15px;
+            position: relative;
+        }
+        
+        .progress-fill::after {
+            content: '🚀';
+            position: absolute;
+            right: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+        }
+        
+        .progress-text {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #2c3e50;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 10px;
+            text-shadow: none;
+        }
+        
+        .excitement-meter {
+            background: linear-gradient(135deg, #ff6b9d, #c44569);
+            color: white;
+            padding: 25px;
+            border-radius: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .excitement-bar {
+            background: rgba(255,255,255,0.3);
+            height: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .excitement-fill {
+            background: linear-gradient(90deg, #f1c40f, #e67e22, #e74c3c);
+            height: 100%;
+            width: 0%;
+            border-radius: 10px;
+            animation: excitementPulse 2s ease-in-out infinite;
+            transition: width 1s ease;
+        }
+        
+        @keyframes excitementPulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+        
+        .family-mission {
+            background: linear-gradient(135deg, #a8e6cf, #7fcdcd);
+            padding: 25px;
+            border-radius: 20px;
+            margin: 20px 0;
+            border: 3px solid #4ecdc4;
+        }
+        
+        .mission-title {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .mission-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .mission-list li {
+            background: rgba(255,255,255,0.7);
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .mission-list li:hover {
+            transform: translateX(10px);
+        }
+        
+        .mission-list li::before {
+            content: '🎯';
+            margin-right: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .fun-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .feature-card {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            color: white;
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: shimmer 3s linear infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .day-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .day-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ff6b9d, #c44569, #f8b500, #e55039);
+        }
+        
+        .day-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+        }
+        
+        .day-number {
+            background: linear-gradient(135deg, #ff6b9d, #c44569);
+            color: white;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-right: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .day-title {
+            flex: 1;
+        }
+        
+        .day-title h2 {
+            font-size: 2.2rem;
+            color: #e55039;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .day-subtitle {
+            color: #7f8c8d;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, #ff6b9d, #c44569, #f8b500, #e55039);
+            border-radius: 2px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 35px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 25px;
+            border-radius: 20px;
+            border-left: 5px solid #ff6b9d;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .timeline-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -47px;
+            top: 30px;
+            width: 16px;
+            height: 16px;
+            background: #ff6b9d;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        .timeline-item.completed {
+            background: linear-gradient(135deg, #d4edda, #c3e6cb);
+            border-left-color: #28a745;
+            animation: celebration 0.6s ease;
+        }
+        
+        .timeline-item.completed::before {
+            background: #28a745;
+            content: '✓';
+            color: white;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        @keyframes celebration {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); background: linear-gradient(135deg, #fff3cd, #ffeaa7); }
+            100% { transform: scale(1); }
+        }
+        
+        .time-badge {
+            background: linear-gradient(135deg, #e55039, #c0392b);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+        
+        .activity-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .activity-description {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .checklist li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            padding: 8px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .checklist li:hover {
+            background-color: rgba(255, 107, 157, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .checklist input[type="checkbox"] {
+            margin-right: 15px;
+            transform: scale(1.5);
+            cursor: pointer;
+        }
+        
+        .checklist input[type="checkbox"]:checked + span {
+            text-decoration: line-through;
+            opacity: 0.7;
+            color: #28a745;
+            font-weight: bold;
+        }
+        
+        .shopping-list, .recipe-section, .map-section {
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .shopping-list {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border: 2px solid #f8d347;
+        }
+        
+        .recipe-section {
+            background: linear-gradient(135deg, #f8d7da, #f1c2c7);
+            border: 2px solid #f56565;
+        }
+        
+        .map-section {
+            background: linear-gradient(135deg, #d1ecf1, #bee5eb);
+            border: 2px solid #17a2b8;
+        }
+        
+        .shopping-list h4, .recipe-section h4, .map-section h4 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .shopping-list h4 {
+            color: #856404;
+        }
+        
+        .recipe-section h4 {
+            color: #721c24;
+        }
+        
+        .map-section h4 {
+            color: #0c5460;
+        }
+        
+        .recipe-steps {
+            list-style: none;
+            counter-reset: step-counter;
+        }
+        
+        .recipe-steps li {
+            counter-increment: step-counter;
+            margin-bottom: 15px;
+            padding-left: 40px;
+            position: relative;
+            font-size: 1.1rem;
+        }
+        
+        .recipe-steps li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: linear-gradient(135deg, #dc3545, #c82333);
+            color: white;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        .location-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .location-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 5px solid #17a2b8;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .location-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        
+        .location-card h5 {
+            color: #0c5460;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .location-card p {
+            font-size: 1rem;
+            color: #6c757d;
+            margin-bottom: 15px;
+        }
+        
+        .weather-widget {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            color: white;
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .weather-widget::before {
+            content: '☀️🌤️⛅🌦️';
+            position: absolute;
+            top: 10px;
+            left: -100px;
+            font-size: 2rem;
+            animation: weatherMove 10s linear infinite;
+        }
+        
+        @keyframes weatherMove {
+            0% { left: -100px; }
+            100% { left: 100%; }
+        }
+        
+        .photo-memories {
+            background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+            padding: 25px;
+            border-radius: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .photo-placeholder {
+            background: rgba(255,255,255,0.8);
+            border: 2px dashed #e17055;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .photo-placeholder:hover {
+            background: rgba(255,255,255,1);
+            transform: scale(1.05);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .family-members {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .countdown-timer {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .day-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .day-number {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏔️ 家族で楽しむ飛騨・高山大冒険！ 🎉</h1>
+            
+            <div class="family-info">
+                <h2>🚗 家族3人の素敵な旅行 🚗</h2>
+                <p>2025年9月27日（土）〜 9月28日（日）</p>
+                <div class="family-members">
+                    <div class="family-member">
+                        <div class="member-icon">👨‍💼</div>
+                        <div>パパ</div>
+                    </div>
+                    <div class="family-member">
+                        <div class="member-icon">👩‍💼</div>
+                        <div>ママ</div>
+                    </div>
+                    <div class="family-member">
+                        <div class="member-icon">👨‍🎓</div>
+                        <div>息子さん(24歳)</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="countdown-section">
+                <h2>🚀 出発まであと...</h2>
+                <div class="countdown-timer" id="countdownTimer">
+                    <div class="countdown-unit">
+                        <span class="countdown-number" id="days">-</span>
+                        <span class="countdown-label">日</span>
+                    </div>
+                    <div class="countdown-unit">
+                        <span class="countdown-number" id="hours">-</span>
+                        <span class="countdown-label">時間</span>
+                    </div>
+                    <div class="countdown-unit">
+                        <span class="countdown-number" id="minutes">-</span>
+                        <span class="countdown-label">分</span>
+                    </div>
+                    <div class="countdown-unit">
+                        <span class="countdown-number" id="seconds">-</span>
+                        <span class="countdown-label">秒</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+            <div class="progress-text" id="progressText">冒険の準備: 0% 完了</div>
+        </div>
+
+        <!-- Excitement Meter -->
+        <div class="excitement-meter">
+            <h2>🎊 家族のワクワクメーター 🎊</h2>
+            <div class="excitement-bar">
+                <div class="excitement-fill" id="excitementFill"></div>
+            </div>
+            <p id="excitementText">みんなの気持ち: ワクワク開始！ 0% 🌱</p>
+        </div>
+
+        <!-- Family Mission -->
+        <div class="family-mission">
+            <h3 class="mission-title">🎯 今回の家族ミッション</h3>
+            <ul class="mission-list">
+                <li>朝市で新鮮な食材をゲットせよ！</li>
+                <li>飛騨牛の美味しいハンバーガーを作ろう！</li>
+                <li>朴葉味噌の秘密を解き明かせ！</li>
+                <li>焚き火とサウナで大人のリラックスタイム</li>
+                <li>古川の美しい風景をInstagramに！</li>
+                <li>家族3人で地酒を楽しもう🍶</li>
+            </ul>
+        </div>
+
+        <!-- Fun Features -->
+        <div class="fun-features">
+            <div class="feature-card" onclick="playSound()">
+                <span class="feature-icon">🎵</span>
+                <h3>家族プレイリスト</h3>
+                <p>みんなで選んだ旅行BGM</p>
+            </div>
+            <div class="feature-card" onclick="showRandomTip()">
+                <span class="feature-icon">💡</span>
+                <h3>旅行のコツ</h3>
+                <p>より楽しむためのヒント集</p>
+            </div>
+            <div class="feature-card" onclick="takeFamilyPhoto()">
+                <span class="feature-icon">📸</span>
+                <h3>思い出写真</h3>
+                <p>家族3人の素敵な瞬間を記録</p>
+            </div>
+        </div>
+
+        <!-- Day 1 -->
+        <div class="day-section">
+            <div class="day-header">
+                <div class="day-number">1</div>
+                <div class="day-title">
+                    <h2>9月27日（土）🌅</h2>
+                    <div class="day-subtitle">食材調達大作戦 → 高山散策 → WAT RESORT BBQ祭り！</div>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="time-badge">🚗 05:30</div>
+                    <div class="activity-title">富山市婦中町西本郷 大冒険スタート！</div>
+                    <div class="activity-description">早起きして朝市の新鮮食材をゲットしよう！家族3人でのんびりドライブ♪</div>
+                    <ul class="checklist">
+                        <li><input type="checkbox" id="departure" onchange="updateProgress(); checkCompleted(this);"><span>🚗 車の点検完了（パパの腕の見せ所）</span></li>
+                        <li><input type="checkbox" id="fuel" onchange="updateProgress(); checkCompleted(this);"><span>⛽ ガソリン満タン確認</span></li>
+                        <li><input type="checkbox" id="cooler" onchange="updateProgress(); checkCompleted(this);"><span>🧊 クーラーボックス準備OK</span></li>
+                        <li><input type="checkbox" id="coffee" onchange="updateProgress(); checkCompleted(this);"><span>☕ 車内用コーヒー準備（みんなで眠気覚まし）</span></li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="time-badge">🌅 07:00</div>
+                    <div class="activity-title">飛騨高山宮川朝市 - 食材ハンティング大作戦！</div>
+                    <div class="activity-description">新鮮野菜と朴葉味噌の材料をゲット！息子さんも食材選びに参加</div>
+                    
+                    <div class="shopping-list">
+                        <h4>🛒 家族でお買い物リスト</h4>
+                        <ul class="checklist">
+                            <li><input type="checkbox" id="vegetables" onchange="updateProgress(); checkCompleted(this);"><span>🌽 BBQ用野菜（とうもろこし、なす、ピーマン、玉ねぎ）</span></li>
+                            <li><input type="checkbox" id="mushrooms" onchange="updateProgress(); checkCompleted(this);"><span>🍄 きのこファミリー（しいたけ、えのき、しめじ）</span></li>
+                            <li><input type="checkbox" id="burger-veg" onchange="updateProgress(); checkCompleted(this);"><span>🍔 ハンバーガー用（レタス、トマト、チーズ）</span></li>
+                            <li><input type="checkbox" id="hotdog-items" onchange="updateProgress(); checkCompleted(this);"><span>🌭 ホットドッグ用（バン、マスタード、ケチャップ）</span></li>
+                            <li><input type="checkbox" id="hoba" onchange="updateProgress(); checkCompleted(this);"><span>🍃 朴葉（ほおば）- 魔法の葉っぱ</span></li>
+                            <li><input type="checkbox" id="miso" onchange="updateProgress(); checkCompleted(this);"><span>🥄 飛騨味噌（甘口の秘密の味）</span></li>
+                            <li><input type="checkbox" id="leek" onchange="updateProgress(); checkCompleted(this);"><span>🌿 長ねぎ、山菜（自然の恵み）</span></li>
+                            <li><input type="checkbox" id="sake" onchange="updateProgress(); checkCompleted(this);"><span>🍶 地酒（大人3人で楽しむ）、地元ジュース</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="time-badge">🥩 08:30</div>
+                    <div class="activity-title">飛騨高山ミート ギフトショップ</div>
+                    <div class="activity-description">飛騨牛とソーセージを調達。息子さんにお肉の目利きを教えてもらおう！</div>
+                    
+                    <div class="shopping-list">
+                        <h4>🥩 肉類ショッピングリスト</h4>
+                        <ul class="checklist">
+                            <li><input type="checkbox" id="beef-mince" onchange="updateProgress(); checkCompleted(this);"><span>🍔 飛騨牛ひき肉（ハンバーガーパティ用）</span></li>
+                            <li><input type="checkbox" id="sausages" onchange="updateProgress(); checkCompleted(this);"><span>🌭 地元ソーセージ（太めのもの）</span></li>
+                            <li><input type="checkbox" id="beef-steak" onchange="updateProgress(); checkCompleted(this);"><span>🥩 飛騨牛ステーキ用</span></li>
+                            <li><input type="checkbox" id="pork" onchange="updateProgress(); checkCompleted(this);"><span>🐷 朴葉味噌用豚肉細切れ</span></li>
+                            <li><input type="checkbox" id="ice" onchange="updateProgress(); checkCompleted(this);"><span>🧊 保冷剤・氷</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="time-badge">🏯 09:00 - 13:00</div>
+                    <div class="activity-title">高山散策タイム</div>
+                    <div class="activity-description">家族3人で4時間の充実観光！インスタ映えスポットもチェック📸</div>
+                    
+                    <div class="map-section">
+                        <h4>📍 高山観光スポット</h4>
+                        <div class="location-grid">
+                            <div class="location-card">
+                                <h5>高山陣屋</h5>
+                                <p>江戸時代の代官所、全国唯一現存。歴史好きの息子さんも楽しめる</p>
+                                <input type="checkbox" id="jinya" onchange="updateProgress(); checkCompleted(this);"> 訪問完了
+                            </div>
+                            <div class="location-card">
+                                <h5>古い町並み（三町）</h5>
+                                <p>酒蔵見学・試飲、伝統工芸品。大人の楽しみ満載</p>
+                                <input type="checkbox" id="old-town" onchange="updateProgress(); checkCompleted(this);"> 散策完了
+                            </div>
+                            <div class="location-card">
+                                <h5>飛騨牛握り</h5>
+                                <p>食べ歩きグルメの定番。みんなでシェア</p>
+                                <input type="checkbox" id="beef-sushi" onchange="updateProgress(); checkCompleted(this);"> 食べた
+                            </div>
+                            <div class="location-card">
+                                <h5>高山ラーメン</h5>
+                                <p>あっさり醤油ベース。ランチに最適</p>
+                                <input type="checkbox" id="ramen" onchange="updateProgress(); checkCompleted(this);"> ランチ完了
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="time-badge">🏨 15:00</div>
+                    <div class="activity-title">WAT RESORT チェックイン</div>
+                    <div class="activity-description">食材を冷蔵保存、BBQ準備。サウナ施設もチェック！</div>
+                    <ul class="checklist">
+                        <li><input type="checkbox" id="checkin" onchange="updateProgress(); checkCompleted(this);"><span>🏨 チェックイン手続き</span></li>
+                        <li><input type="checkbox" id="food-storage" onchange="updateProgress(); checkCompleted(this);"><span>🧊 食材を冷蔵庫に保管</span></li>
+                        <li><input type="checkbox" id="bbq-setup" onchange="updateProgress(); checkCompleted(this);"><span>🔥 BBQ設備の確認</span></li>
+                        <li><input type="checkbox" id="sauna-check" onchange="updateProgress(); checkCompleted(this);"><span>🧖‍♂️ サウナ施設見学</span></li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="time-badge">🔥 16:00 - 21:00</div>
+                    <div class="activity-title">家族BBQタイム！</div>
+                    <div class="activity-description">飛騨牛ハンバーガー＋朴葉味噌＋焚き火。家族みんなで料理を楽しもう！</div>
+                    
+                    <div class="recipe-section">
+                        <h4>🍔 飛騨牛ハンバーガーレシピ</h4>
+                        <ol class="recipe-steps">
+                            <li>飛騨牛ひき肉でパティを成形（息子さんの力仕事！）</li>
+                            <li>焚き火で豪快に焼く（外カリッ、中ジューシー）</li>
+                            <li>バンを軽く炙って香ばしく</li>
+                            <li>新鮮野菜＆チーズで豪華トッピング</li>
+                            <li>家族特製ハンバーガー完成！</li>
+                        </ol>
+                        <ul class="checklist">
+                            <li><input type="checkbox" id="burger-made" onchange="updateProgress(); checkCompleted(this);"><span>🍔 ハンバーガー作成完了</span></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="recipe-section">
+                        <h4>🍃 朴葉味噌レシピ</h4>
+                        <ol class="recipe-steps">
+                            <li>朴葉を焚き火で軽く炙って香りを立たせる</li>
+                            <li>朴葉に飛騨味噌をたっぷり乗せる</li>
+                            <li>豚肉、長ねぎ、山菜をトッピング</li>
+                            <li>焚き火の遠火でじっくり焼く（ママの得意分野）</li>
+                            <li>味噌がぐつぐつ言い始めたら完成！</li>
+                        </ol>
+                        <ul class="checklist">
+                            <li><input type="checkbox" id="hoba-miso-made" onchange="updateProgress(); checkCompleted(this);"><span>🍃 朴葉味噌作成完了</span></li>
+                        </ul>
+                    </div>
+
+                    <ul class="checklist">
+                        <li><input type="checkbox" id="fire-start" onchange="updateProgress(); checkCompleted(this);"><span>🔥 焚き火スタート</span></li>
+                        <li><input type="checkbox" id="vegetables-grilled" onchange="updateProgress(); checkCompleted(this);"><span>🌽 野菜BBQ</span></li>
+                        <li><input type="checkbox" id="steak" onchange="updateProgress(); checkCompleted(this);"><span>🥩 飛騨牛ステーキ</span></li>
+                        <li><input type="checkbox" id="sake-time" onchange="updateProgress(); checkCompleted(this);"><span>🍶 家族で地酒乾杯</span></li>
+                        <li><input type="checkbox" id="sauna" onchange="updateProgress(); checkCompleted(this);"><span>🧖‍♂️ みんなでサウナタイム</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 2 -->
+        <div class="day-section">
+            <div class="day-header">
+                <div class="day-number">2</div>
+                <div class="day-title">
+                    <h2>9月28日（日）☀️</h2>
+                    <div class="day-subtitle">ホットドッグモーニング → 古川散策 → 家族でゆっくり帰路</div>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="time-badge">☀️ 08:00</div>
+                    <div class="activity-title">ホットドッグモーニング</div>
+                    <div class="activity-description">地元ソーセージで朝食。息子さんにコーヒーの淹れ方を教えてもらおう☕</div>
+                    
+                    <div class="recipe-section">
+                        <h4>🌭 ホットドッグレシピ</h4>
+                        <ol class="recipe-steps">
+                            <li>前日の焚き火を再点火</li>
+                            <li>地元ソーセージを皮パリッと焼く</li>
+                            <li>ホットドッグバンを温める</li>
+                            <li>玉ねぎを軽くソテー</li>
+                            <li>マスタード＆ケチャップでトッピング</li>
+                            <li>家族でコーヒーと一緒に🌭☕</li>
+                        </ol>
+                        <ul class="checklist">
+                            <li><input type="checkbox" id="morning-hotdog" onchange="updateProgress(); checkCompleted(this);"><span>🌭 ホットドッグ朝食完了</span></li>
+                            <li><input type="checkbox" id="morning-sauna" onchange="updateProgress(); checkCompleted(this);"><span>🧖‍♂️ 最後のサウナ（家族で）</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="time-badge">🏁 10:00</div>
+                    <div class="activity-title">WAT RESORT チェックアウト</div>
+                    <ul class="checklist">
+                        <li><input type="checkbox" id="checkout" onchange="updateProgress(); checkCompleted(this);"><span>🏨 チェックアウト完了</span></li>
+                        <li><input type="checkbox" id="souvenirs" onchange="updateProgress(); checkCompleted(this);"><span>🎁 お土産購入</span></li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="time-badge">🏛️ 10:30 - 14:00</div>
+                    <div class="activity-title">古川散策（CoIU含む）</div>
+                    <div class="activity-description">古川エリア完全制覇！息子さんが興味を持ちそうな大学キャンパスも見学</div>
+                    
+                    <div class="map-section">
+                        <h4>📍 古川散策ルート</h4>
+                        <div class="location-grid">
+                            <div class="location-card">
+                                <h5>飛驒市役所駐車場</h5>
+                                <p>無料駐車場・散策拠点</p>
+                                <input type="checkbox" id="parking" onchange="updateProgress(); checkCompleted(this);"> 駐車完了
+                            </div>
+                            <div class="location-card">
+                                <h5>CoIU 1号館</h5>
+                                <p>旧料理旅館改装キャンパス。ユニークな教育空間</p>
+                                <input type="checkbox" id="coiu1" onchange="updateProgress(); checkCompleted(this);"> 見学完了
+                            </div>
+                            <div class="location-card">
+                                <h5>瀬戸川・白壁土蔵街</h5>
+                                <p>鯉の泳ぐ美しい用水路。写真スポット📸</p>
+                                <input type="checkbox" id="setogawa" onchange="updateProgress(); checkCompleted(this);"> 散策完了
+                            </div>
+                            <div class="location-card">
+                                <h5>CoIU 2号館</h5>
+                                <p>古い町並み中のキャンパス。図書スペース</p>
+                                <input type="checkbox" id="coiu2" onchange="updateProgress(); checkCompleted(this);"> 見学完了
+                            </div>
+                            <div class="location-card">
+                                <h5>古里精肉店</h5>
+                                <p>お土産用飛騨牛購入。地元の方とのふれあい</p>
+                                <input type="checkbox" id="meat-shop" onchange="updateProgress(); checkCompleted(this);"> お土産購入
+                            </div>
+                            <div class="location-card">
+                                <h5>CoIU 3号館</h5>
+                                <p>飛騨古川駅から徒歩1分。大講義室見学</p>
+                                <input type="checkbox" id="coiu3" onchange="updateProgress(); checkCompleted(this);"> 見学完了
+                            </div>
+                        </div>
+                    </div>
+
+                    <ul class="checklist">
+                        <li><input type="checkbox" id="furukawa-lunch" onchange="updateProgress(); checkCompleted(this);"><span>🍽️ 古川で昼食（家族で朴葉味噌定食）</span></li>
+                        <li><input type="checkbox" id="coffee-break" onchange="updateProgress(); checkCompleted(this);"><span>☕ 古川の喫茶店で休憩</span></li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="time-badge">🚗 14:30</div>
+                    <div class="activity-title">富山への帰路</div>
+                    <div class="activity-description">約1時間30分のドライブ。旅の思い出話で盛り上がろう</div>
+                    <ul class="checklist">
+                        <li><input type="checkbox" id="departure-furukawa" onchange="updateProgress(); checkCompleted(this);"><span>🚗 古川出発</span></li>
+                        <li><input type="checkbox" id="arrival-home" onchange="updateProgress(); checkCompleted(this);"><span>🏠 富山到着（16:00予定）</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Photo Memories Section -->
+        <div class="photo-memories">
+            <h2>📸 家族の思い出フォトアルバム</h2>
+            <p>素敵な瞬間を記録しよう！クリックして写真を追加</p>
+            <div class="photo-grid">
+                <div class="photo-placeholder" onclick="addPhoto(1)">
+                    <span style="font-size: 2rem;">📷</span>
+                    <p>朝市での写真</p>
+                </div>
+                <div class="photo-placeholder" onclick="addPhoto(2)">
+                    <span style="font-size: 2rem;">🍔</span>
+                    <p>BBQ写真</p>
+                </div>
+                <div class="photo-placeholder" onclick="addPhoto(3)">
+                    <span style="font-size: 2rem;">🏯</span>
+                    <p>古川散策</p>
+                </div>
+                <div class="photo-placeholder" onclick="addPhoto(4)">
+                    <span style="font-size: 2rem;">👨‍👩‍👦</span>
+                    <p>家族写真</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Weather Widget -->
+        <div class="weather-widget">
+            <h3>🌤️ 天気予報チェック</h3>
+            <p>飛騨高山の天気をチェックして、最高のBBQ日和を確認しましょう！</p>
+            <button onclick="alert('素晴らしい天気予報です！☀️ BBQ日和間違いなし！')" style="background: rgba(255,255,255,0.2); border: 1px solid white; color: white; padding: 15px 25px; border-radius: 10px; cursor: pointer; font-size: 1.1rem;">天気予報を見る</button>
+        </div>
+
+        <!-- Notes Section -->
+        <div style="background: linear-gradient(135deg, #f8f9fa, #e9ecef); border-radius: 20px; padding: 25px; margin: 20px 0;">
+            <h4 style="color: #495057; margin-bottom: 15px; font-size: 1.4rem;">📝 旅行メモ & 家族の感想</h4>
+            <textarea id="travelNotes" placeholder="旅行の感想や気づいたこと、次回への改善点などをメモしましょう..." style="width: 100%; height: 120px; border: 2px solid #ced4da; border-radius: 10px; padding: 15px; font-family: inherit; resize: vertical; font-size: 1rem;"></textarea>
+            <button onclick="saveNotes()" style="margin-top: 15px; background: linear-gradient(135deg, #007bff, #0056b3); color: white; border: none; padding: 12px 25px; border-radius: 10px; cursor: pointer; font-size: 1rem;">💾 メモを保存</button>
+        </div>
+    </div>
+
+    <script>
+        // Countdown timer for departure
+        function updateCountdown() {
+            const departureDate = new Date('2025-09-27T05:30:00').getTime(); // 2025年に変更
+            const now = new Date().getTime();
+            const distance = departureDate - now;
+
+            if (distance > 0) {
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById('days').textContent = days;
+                document.getElementById('hours').textContent = hours;
+                document.getElementById('minutes').textContent = minutes;
+                document.getElementById('seconds').textContent = seconds;
+            } else {
+                document.getElementById('countdownTimer').innerHTML = '<h2 style="color: #ffffff; background: rgba(231, 76, 60, 0.8); padding: 20px; border-radius: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">🎉 旅行スタート！楽しんでください！ 🎉</h2>';
+            }
+        }
+
+        // Update countdown every second and start immediately
+        updateCountdown(); // 即座に実行
+        setInterval(updateCountdown, 1000);
+
+        // Progress tracking
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const checkedBoxes = document.querySelectorAll('input[type="checkbox"]:checked');
+            const progress = (checkedBoxes.length / checkboxes.length) * 100;
+            
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('progressText').textContent = `冒険の準備: ${Math.round(progress)}% 完了 (${checkedBoxes.length}/${checkboxes.length})`;
+            
+            // Update excitement meter
+            updateExcitement(progress);
+            
+            // Celebration when reaching milestones
+            if (progress >= 25 && progress < 50 && !sessionStorage.getItem('milestone25')) {
+                setTimeout(() => {
+                    alert('🎉 25%達成！順調に準備が進んでいますね！');
+                    sessionStorage.setItem('milestone25', 'true');
+                }, 500);
+            } else if (progress >= 50 && progress < 75 && !sessionStorage.getItem('milestone50')) {
+                setTimeout(() => {
+                    alert('🎊 半分完了！もうすぐ旅行ですね！');
+                    sessionStorage.setItem('milestone50', 'true');
+                }, 500);
+            } else if (progress >= 75 && progress < 100 && !sessionStorage.getItem('milestone75')) {
+                setTimeout(() => {
+                    alert('🚀 75%完了！あと少しで準備万端です！');
+                    sessionStorage.setItem('milestone75', 'true');
+                }, 500);
+            } else if (progress === 100 && !sessionStorage.getItem('milestone100')) {
+                setTimeout(() => {
+                    confetti();
+                    alert('🎉🎊 完璧！すべての準備が完了しました！素晴らしい旅行になりそうですね！');
+                    sessionStorage.setItem('milestone100', 'true');
+                }, 500);
+            }
+        }
+
+        // Update excitement meter based on progress
+        function updateExcitement(progress) {
+            const excitementFill = document.getElementById('excitementFill');
+            const excitementText = document.getElementById('excitementText');
+            
+            // Set the width of excitement bar
+            excitementFill.style.width = progress + '%';
+            
+            // Update text based on progress
+            let excitementLevel = '';
+            let emoji = '';
+            
+            if (progress === 0) {
+                excitementLevel = 'ワクワク開始！';
+                emoji = '🌱';
+            } else if (progress < 25) {
+                excitementLevel = 'だんだんワクワク！';
+                emoji = '😊';
+            } else if (progress < 50) {
+                excitementLevel = 'ワクワクしてきた！';
+                emoji = '😄';
+            } else if (progress < 75) {
+                excitementLevel = 'かなりワクワク！';
+                emoji = '🤗';
+            } else if (progress < 100) {
+                excitementLevel = '超ワクワク！';
+                emoji = '🚀';
+            } else {
+                excitementLevel = 'MAX興奮！旅行だー！';
+                emoji = '🎉🎊✨';
+            }
+            
+            excitementText.textContent = `みんなの気持ち: ${excitementLevel} ${Math.round(progress)}% ${emoji}`;
+        }
+
+        // Check if item is completed and animate
+        function checkCompleted(checkbox) {
+            const timelineItem = checkbox.closest('.timeline-item');
+            if (checkbox.checked) {
+                timelineItem.classList.add('completed');
+                // Add celebration animation
+                setTimeout(() => {
+                    timelineItem.style.transform = 'scale(1.02)';
+                    setTimeout(() => {
+                        timelineItem.style.transform = 'scale(1)';
+                    }, 300);
+                }, 100);
+            } else {
+                timelineItem.classList.remove('completed');
+            }
+        }
+
+        // Confetti animation for 100% completion
+        function confetti() {
+            const colors = ['#ff6b9d', '#c44569', '#f8b500', '#e55039', '#74b9ff'];
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    createConfettiPiece(colors[Math.floor(Math.random() * colors.length)]);
+                }, i * 50);
+            }
+        }
+
+        function createConfettiPiece(color) {
+            const confetti = document.createElement('div');
+            confetti.style.position = 'fixed';
+            confetti.style.width = '10px';
+            confetti.style.height = '10px';
+            confetti.style.backgroundColor = color;
+            confetti.style.left = Math.random() * window.innerWidth + 'px';
+            confetti.style.top = '-10px';
+            confetti.style.borderRadius = '50%';
+            confetti.style.pointerEvents = 'none';
+            confetti.style.zIndex = '9999';
+            document.body.appendChild(confetti);
+
+            let pos = -10;
+            const fall = setInterval(() => {
+                pos += 5;
+                confetti.style.top = pos + 'px';
+                if (pos > window.innerHeight) {
+                    clearInterval(fall);
+                    document.body.removeChild(confetti);
+                }
+            }, 20);
+        }
+
+        // Fun interactive features
+        function playSound() {
+            const songs = [
+                "🎵 家族で歌おう「ふるさと」",
+                "🎶 ドライブソング「津軽海峡冬景色」",
+                "🎼 BBQ BGM「キャンプファイヤーソング」",
+                "🎤 家族カラオケ「青春」"
+            ];
+            const randomSong = songs[Math.floor(Math.random() * songs.length)];
+            alert(`${randomSong}\n\n♪ みんなで楽しく歌いましょう！`);
+        }
+
+        function showRandomTip() {
+            const tips = [
+                "💡 朝市は早い時間ほど品揃えが豊富！7時到着がベスト",
+                "📸 瀬戸川の鯉は午前中の方が活発で写真映えします",
+                "🍶 飛騨の地酒は「久寿玉」「蓬莱」がおすすめ",
+                "🔥 焚き火は着火剤を使って息子さんに火起こしを教えてあげて",
+                "🧖‍♂️ サウナ後の外気浴は最高！家族で整いましょう",
+                "🥩 飛騨牛は表面をサッと焼いて中はレアがベスト",
+                "📱 CoIUキャンパスは新しい教育の形。息子さんも興味深いはず"
+            ];
+            const randomTip = tips[Math.floor(Math.random() * tips.length)];
+            alert(`旅行のコツ:\n\n${randomTip}`);
+        }
+
+        function takeFamilyPhoto() {
+            const photoIdeas = [
+                "📸 朝市での買い物シーン",
+                "🍔 BBQハンバーガーと家族の笑顔",
+                "🍃 朴葉味噌作りの様子",
+                "🔥 焚き火を囲んでの家族団らん",
+                "🏯 高山陣屋前での記念写真",
+                "🌊 瀬戸川の鯉と一緒に",
+                "👨‍👩‍👦 古い町並みでの家族写真"
+            ];
+            const randomIdea = photoIdeas[Math.floor(Math.random() * photoIdeas.length)];
+            alert(`写真アイデア:\n\n${randomIdea}\n\nステキな思い出を残しましょう！`);
+        }
+
+        function addPhoto(photoType) {
+            const photoTypes = {
+                1: "朝市での家族写真",
+                2: "BBQ & ハンバーガー作り",
+                3: "古川散策の風景",
+                4: "家族全員での記念写真"
+            };
+            alert(`${photoTypes[photoType]}の写真を追加しました！\n\n📱 実際の旅行では、たくさん写真を撮って素敵な思い出を作ってくださいね！`);
+        }
+
+        function saveNotes() {
+            const notes = document.getElementById('travelNotes').value;
+            if (notes.trim()) {
+                localStorage.setItem('familyTravelNotes', notes);
+                alert('📝 メモを保存しました！\n\n旅行中の大切な思い出や感想を記録しておきましょう。');
+            } else {
+                alert('メモに内容を入力してから保存してください。');
+            }
+        }
+
+        // Load saved notes and checkbox states
+        window.addEventListener('load', function() {
+            const savedNotes = localStorage.getItem('familyTravelNotes');
+            if (savedNotes) {
+                document.getElementById('travelNotes').value = savedNotes;
+            }
+
+            // Load saved checkbox states
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                const savedState = localStorage.getItem(checkbox.id);
+                if (savedState === 'true') {
+                    checkbox.checked = true;
+                    checkCompleted(checkbox);
+                }
+            });
+            // Initialize excitement meter and progress
+            updateProgress();
+            updateExcitement(0);
+        });
+
+        // Save checkbox states
+        document.addEventListener('change', function(e) {
+            if (e.target.type === 'checkbox') {
+                localStorage.setItem(e.target.id, e.target.checked);
+            }
+        });
+    </script>
+</body>
+</html>
