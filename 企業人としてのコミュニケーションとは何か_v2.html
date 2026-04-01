@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>企業人としてのコミュニケーションとは何か v2</title>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --ink:#23272f;
+  --sub:#5a6071;
+  --mute:#8b93a7;
+  --border:#e0e4ec;
+  --bg:#f6f7fb;
+  --white:#ffffff;
+  --blue:#4f7df5;
+  --blue-light:#eef3ff;
+  --teal:#0ea5a0;
+  --teal-light:#edfcfb;
+  --green:#22a065;
+  --green-light:#eefbf3;
+  --orange:#e87b35;
+  --orange-light:#fff6ef;
+  --red:#d94452;
+  --red-light:#fef1f2;
+  --purple:#7c5cfc;
+  --purple-light:#f4f1ff;
+  --yellow-light:#fffce8;
+  --slide-w:1280px;
+  --slide-h:720px;
+  --radius:14px;
+  --radius-sm:10px;
+}
+
+html,body{
+  width:100%;height:100%;
+  background:#e8eaf0;
+  font-family:'Noto Sans JP','Hiragino Sans','Meiryo',sans-serif;
+  overflow:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ═══ Deck ═══ */
+.deck{position:relative;width:100vw;height:100vh}
+.slide{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;
+  transition:opacity .45s ease;
+}
+.slide.active{opacity:1;pointer-events:auto}
+.slide-inner{
+  width:var(--slide-w);height:var(--slide-h);
+  position:relative;overflow:hidden;
+  border-radius:16px;
+  background:var(--white);
+  box-shadow:0 8px 40px rgba(0,0,0,.10), 0 1px 3px rgba(0,0,0,.06);
+  transform-origin:center center;
+}
+
+/* ═══ Common Parts ═══ */
+.page-num{
+  position:absolute;bottom:18px;right:28px;
+  font-size:12px;color:var(--mute);font-weight:500;
+}
+.tag{
+  display:inline-block;
+  font-size:11px;font-weight:700;
+  padding:3px 10px;border-radius:99px;
+  letter-spacing:.5px;
+}
+.pill{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:13px;font-weight:600;
+  padding:5px 14px;border-radius:99px;
+  background:var(--blue-light);color:var(--blue);
+}
+
+/* header strip */
+.hdr{
+  position:absolute;top:0;left:0;right:0;
+  height:6px;
+  border-radius:16px 16px 0 0;
+}
+
+/* section label */
+.sec-label{
+  font-size:11px;font-weight:700;letter-spacing:2px;
+  text-transform:uppercase;color:var(--mute);
+  margin-bottom:6px;
+}
+
+/* ═══ Content wrapper ═══ */
+.body{
+  position:absolute;
+  top:0;left:0;right:0;bottom:0;
+  padding:52px 64px 48px;
+  display:flex;flex-direction:column;
+}
+
+/* ══════════════════════════════
+   Slide 1 – Title
+   ══════════════════════════════ */
+.s1{background:linear-gradient(135deg,#f6f7fb 0%,#eef3ff 50%,#edfcfb 100%)}
+.s1 .hdr{background:linear-gradient(90deg,var(--blue),var(--teal))}
+.s1 .body{justify-content:center;align-items:flex-start;padding-left:88px}
+.s1 .emoji-big{font-size:52px;margin-bottom:16px}
+.s1 h1{
+  font-size:40px;font-weight:800;color:var(--ink);
+  line-height:1.5;letter-spacing:.5px;
+}
+.s1 h1 span{
+  background:linear-gradient(90deg,var(--blue),var(--teal));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.s1 .subtitle{
+  font-size:18px;color:var(--sub);margin-top:12px;
+  line-height:1.6;
+}
+.s1 .meta{
+  font-size:14px;color:var(--mute);margin-top:40px;line-height:1.8;
+}
+.s1 .deco{
+  position:absolute;right:60px;top:50%;transform:translateY(-50%);
+  width:260px;height:260px;
+  border-radius:50%;
+  background:linear-gradient(135deg,rgba(79,125,245,.08),rgba(14,165,160,.08));
+}
+.s1 .deco::after{
+  content:'';position:absolute;
+  inset:32px;border-radius:50%;
+  border:2px dashed rgba(79,125,245,.15);
+}
+
+/* ══════════════════════════════
+   Slide 2 – Icebreak
+   ══════════════════════════════ */
+.s2{background:var(--yellow-light)}
+.s2 .hdr{background:linear-gradient(90deg,var(--orange),#f5c542)}
+.s2 .body{align-items:center;justify-content:center;gap:18px}
+.s2 .emoji-q{font-size:44px}
+.s2 h2{font-size:34px;color:var(--ink);font-weight:800;text-align:center;line-height:1.5}
+.s2 .ask{font-size:20px;color:var(--orange);font-weight:700;text-align:center}
+.s2 .ex-wrap{
+  display:flex;gap:12px;flex-wrap:wrap;justify-content:center;
+  margin-top:4px;
+}
+.s2 .ex-chip{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:99px;padding:7px 18px;
+  font-size:14px;color:var(--sub);
+}
+.s2 .note-bottom{font-size:14px;color:var(--mute);margin-top:auto;text-align:center}
+
+/* ══════════════════════════════
+   Slide 3 – 今日の話
+   ══════════════════════════════ */
+.s3 .hdr{background:linear-gradient(90deg,var(--blue),var(--purple))}
+.s3 .top-row{display:flex;gap:24px;margin-top:8px}
+.s3 .card-speech{
+  flex:1;background:var(--bg);border-radius:var(--radius);
+  padding:24px 28px;position:relative;
+}
+.s3 .card-speech::after{
+  content:'';position:absolute;bottom:-10px;left:36px;
+  border:10px solid transparent;border-top-color:var(--bg);
+  border-bottom:0;
+}
+.s3 .card-speech p{font-size:17px;color:var(--ink);line-height:1.7}
+.s3 .card-feel{
+  flex:.7;display:flex;align-items:center;justify-content:center;
+}
+.s3 .card-feel .inner{text-align:center}
+.s3 .card-feel .emoji{font-size:36px;margin-bottom:8px}
+.s3 .card-feel .text{font-size:20px;color:var(--blue);font-weight:700;line-height:1.5}
+.s3 .goal-card{
+  margin-top:auto;
+  background:linear-gradient(135deg,var(--blue-light),var(--teal-light));
+  border:2px solid var(--blue);
+  border-radius:var(--radius);
+  padding:28px 36px;
+  text-align:center;
+}
+.s3 .goal-card .label{font-size:12px;color:var(--blue);font-weight:700;letter-spacing:2px;margin-bottom:6px}
+.s3 .goal-card .text{font-size:24px;color:var(--ink);font-weight:700;line-height:1.6}
+
+/* ══════════════════════════════
+   Slide 4 – 正体
+   ══════════════════════════════ */
+.s4 .hdr{background:linear-gradient(90deg,var(--blue),var(--teal))}
+.s4 .wrong-list{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.s4 .wrong{
+  display:flex;align-items:center;gap:14px;
+  padding:10px 16px;
+  border-radius:var(--radius-sm);
+  background:var(--bg);
+}
+.s4 .wrong .x{font-size:20px;color:var(--red);font-weight:800;flex-shrink:0}
+.s4 .wrong .t{font-size:19px;color:var(--mute);text-decoration:line-through}
+.s4 .divider{
+  height:1px;background:var(--border);margin:18px 0;
+}
+.s4 .right-card{
+  background:linear-gradient(135deg,var(--blue-light),var(--teal-light));
+  border:2px solid var(--blue);
+  border-radius:var(--radius);
+  padding:24px;text-align:center;
+}
+.s4 .right-card .mark{font-size:28px;color:var(--blue);font-weight:800;margin-right:10px}
+.s4 .right-card .text{font-size:28px;color:var(--ink);font-weight:800}
+.s4 .aside{
+  text-align:center;font-size:16px;color:var(--sub);
+  margin-top:20px;line-height:1.7;
+}
+.s4 .aside em{font-style:normal;color:var(--teal);font-weight:700}
+
+/* ══════════════════════════════
+   Slide 5 – 4要素
+   ══════════════════════════════ */
+.s5 .hdr{background:linear-gradient(90deg,var(--blue),var(--teal))}
+.s5 .cards{display:flex;gap:14px;margin-top:8px}
+.s5 .el-card{
+  flex:1;border-radius:var(--radius);
+  padding:18px 16px;text-align:center;
+  border:2px solid;background:var(--white);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-height:140px;
+}
+.s5 .el-card .icon{font-size:30px;margin-bottom:6px}
+.s5 .el-card .num{font-size:13px;font-weight:700;margin-bottom:2px}
+.s5 .el-card .label{font-size:15px;font-weight:700;color:var(--ink);line-height:1.4}
+.s5 .el-card .desc{font-size:11px;color:var(--mute);margin-top:6px}
+.s5 .arrows{text-align:center;padding:4px 0;color:var(--border);font-size:22px;letter-spacing:120px}
+.s5 .base{
+  background:var(--ink);border-radius:var(--radius);
+  padding:18px 28px;text-align:center;color:var(--white);
+}
+.s5 .base .icon{font-size:24px;margin-right:8px;vertical-align:middle}
+.s5 .base .label{font-size:20px;font-weight:700;display:inline}
+.s5 .base .desc{font-size:13px;opacity:.6;margin-top:4px}
+.s5 .foot{text-align:center;font-size:14px;color:var(--sub);margin-top:10px}
+
+/* ══════════════════════════════
+   Slide 6 – なぜ重要
+   ══════════════════════════════ */
+.s6 .hdr{background:linear-gradient(90deg,var(--red),var(--orange))}
+.s6 .main-msg{
+  text-align:center;font-size:22px;color:var(--ink);
+  margin-top:12px;line-height:1.6;
+}
+.s6 .main-msg .hl{color:var(--red);font-weight:800;font-size:26px}
+.s6 .bubbles{display:flex;gap:16px;margin-top:20px}
+.s6 .bubble{
+  flex:1;
+  background:var(--red-light);border:1.5px solid #f5c6cb;
+  border-radius:var(--radius);
+  padding:18px 16px;text-align:center;
+  font-size:15px;color:#8b2832;line-height:1.65;
+}
+.s6 .bubble .emoji{font-size:28px;display:block;margin-bottom:6px}
+.s6 .warn{
+  background:var(--orange-light);border:2px solid var(--orange);
+  border-radius:var(--radius);
+  padding:18px 28px;text-align:center;
+  margin-top:20px;
+}
+.s6 .warn p{font-size:20px;font-weight:700;color:#8b4513}
+.s6 .aside{text-align:center;font-size:14px;color:var(--sub);margin-top:12px}
+
+/* ══════════════════════════════
+   Slide 7 – ゴール
+   ══════════════════════════════ */
+.s7 .hdr{background:linear-gradient(90deg,var(--blue),var(--teal))}
+.s7 .flow{display:flex;gap:36px;align-items:flex-start;margin-top:10px;flex:1}
+.s7 .flow-left{flex:1;display:flex;flex-direction:column;align-items:center;gap:0}
+.s7 .step{
+  width:100%;border-radius:var(--radius);
+  padding:22px 28px;text-align:center;color:var(--white);
+}
+.s7 .step .lbl{font-size:11px;font-weight:700;letter-spacing:2px;opacity:.6}
+.s7 .step .txt{font-size:24px;font-weight:700;margin-top:4px;line-height:1.4}
+.s7 .step.a{background:var(--ink)}
+.s7 .step.b{background:var(--blue)}
+.s7 .arrow-d{font-size:28px;color:var(--blue);padding:4px 0}
+.s7 .badge{
+  position:absolute;right:-12px;top:50%;transform:translateY(-50%) rotate(3deg);
+  background:#fff3bf;border:2px solid #e9b308;
+  border-radius:10px;padding:6px 16px;
+  font-size:14px;font-weight:700;color:#854d0e;
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
+  white-space:nowrap;
+}
+.s7 .step-wrap{position:relative;width:100%}
+.s7 .action-box{
+  flex:0 0 320px;
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:var(--radius);padding:24px 28px;
+}
+.s7 .action-box .label{font-size:13px;color:var(--blue);font-weight:700;margin-bottom:12px}
+.s7 .action-box ul{list-style:none;font-size:15px;color:var(--ink);line-height:2.2}
+.s7 .action-box ul li::before{content:'・';color:var(--blue);font-weight:700}
+
+/* ══════════════════════════════
+   Slide 8 – つまずき
+   ══════════════════════════════ */
+.s8 .hdr{background:linear-gradient(90deg,var(--orange),#e9b308)}
+.s8 .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px;flex:1}
+.s8 .trap{
+  border-radius:var(--radius);
+  padding:18px 22px;
+  border-left:5px solid;
+  background:var(--white);
+  box-shadow:0 1px 4px rgba(0,0,0,.04);
+  display:flex;flex-direction:column;gap:4px;
+}
+.s8 .trap .top{display:flex;align-items:center;gap:10px}
+.s8 .trap .emoji{font-size:26px}
+.s8 .trap .title{font-size:17px;font-weight:700;color:var(--ink)}
+.s8 .trap .desc{font-size:13px;color:var(--sub);padding-left:36px;line-height:1.6}
+.s8 .hint{text-align:center;font-size:14px;color:var(--mute);margin-top:auto;padding-top:8px}
+
+/* ══════════════════════════════
+   Slide 9 – 実践3つ
+   ══════════════════════════════ */
+.s9 .hdr{background:linear-gradient(90deg,var(--green),var(--teal))}
+.s9 .cards{display:flex;gap:18px;margin-top:4px;flex:1}
+.s9 .pcard{
+  flex:1;border:2px solid;border-radius:var(--radius);
+  display:flex;flex-direction:column;overflow:hidden;
+  background:var(--white);
+}
+.s9 .pcard .head{
+  padding:16px 18px;display:flex;align-items:flex-start;gap:12px;
+}
+.s9 .pcard .circle{
+  width:40px;height:40px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--white);font-size:18px;font-weight:800;flex-shrink:0;
+}
+.s9 .pcard .card-title{font-size:15px;font-weight:700;color:var(--ink);line-height:1.5;margin-top:3px}
+.s9 .pcard .phrase{
+  margin:0 12px 12px;border-radius:var(--radius-sm);
+  padding:14px 16px;flex:1;
+}
+.s9 .pcard .phrase .lbl{font-size:10px;font-weight:700;color:var(--mute);letter-spacing:1px;margin-bottom:6px}
+.s9 .pcard .phrase .txt{font-size:13px;color:var(--sub);line-height:1.8}
+
+/* ══════════════════════════════
+   Slide 10 – 具体例
+   ══════════════════════════════ */
+.s10 .hdr{background:linear-gradient(90deg,var(--red),var(--green))}
+.s10 .scene{
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:8px;padding:8px 18px;
+  font-size:14px;color:var(--sub);font-weight:600;text-align:center;
+  margin-top:4px;
+}
+.s10 .compare{display:flex;gap:20px;margin-top:12px;flex:1}
+.s10 .ex-box{
+  flex:1;border-radius:var(--radius);padding:20px 24px;
+  border:2px solid;display:flex;flex-direction:column;
+}
+.s10 .ex-box.bad{background:var(--red-light);border-color:#f5c6cb}
+.s10 .ex-box.good{background:var(--green-light);border-color:#a7e8c0}
+.s10 .ex-box .label{font-size:16px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.s10 .ex-box.bad .label{color:var(--red)}
+.s10 .ex-box.good .label{color:var(--green)}
+.s10 .ex-box .speech{
+  font-size:14.5px;line-height:1.85;flex:1;
+  padding:12px 16px;
+  background:rgba(255,255,255,.6);
+  border-radius:var(--radius-sm);
+}
+.s10 .ex-box.bad .speech{color:#6b2b2b}
+.s10 .ex-box.good .speech{color:#22543d}
+.s10 .points{display:flex;gap:12px;margin-top:12px}
+.s10 .pt{
+  flex:1;border-radius:var(--radius-sm);
+  padding:10px 14px;text-align:center;
+  font-size:13px;font-weight:700;color:var(--ink);
+  background:var(--white);border:2px solid;
+}
+
+/* ══════════════════════════════
+   Slide 11 – まとめ
+   ══════════════════════════════ */
+.s11 .hdr{background:linear-gradient(90deg,var(--blue),var(--teal),var(--green))}
+.s11 .recap{display:flex;gap:12px;margin-top:6px}
+.s11 .recap-card{
+  flex:1;border-radius:var(--radius);
+  padding:16px;text-align:center;
+  border:2px solid;background:var(--white);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-height:110px;position:relative;overflow:hidden;
+}
+.s11 .recap-card .top-bar{
+  position:absolute;top:0;left:10px;right:10px;
+  height:3px;border-radius:0 0 2px 2px;
+}
+.s11 .recap-card .icon{font-size:22px;margin-bottom:4px}
+.s11 .recap-card .text{font-size:13px;font-weight:700;color:var(--ink);line-height:1.6}
+.s11 .closing{
+  background:linear-gradient(135deg,#23272f,#2d3748);
+  border-radius:16px;padding:28px 40px;text-align:center;
+  margin-top:auto;flex:1;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.s11 .closing .line{color:#cbd5e1;font-size:18px;line-height:2.1}
+.s11 .closing .line.strong{
+  color:var(--white);font-size:22px;font-weight:700;margin-top:8px;
+}
+
+/* ══════════════════════════════
+   Appendix Slides (ネタ集)
+   ══════════════════════════════ */
+.appendix .hdr{background:linear-gradient(90deg,var(--purple),var(--blue))}
+.appendix .body h2{font-size:26px;font-weight:800;color:var(--ink);margin-bottom:4px}
+.appendix .body h2 .emoji{margin-right:8px}
+
+/* Appendix cover */
+.sa-cover{background:linear-gradient(135deg,var(--purple-light),var(--blue-light))}
+.sa-cover .body{align-items:center;justify-content:center;text-align:center}
+.sa-cover .emoji-big{font-size:56px;margin-bottom:16px}
+.sa-cover h2{font-size:36px;color:var(--ink);font-weight:800}
+.sa-cover .sub{font-size:17px;color:var(--sub);margin-top:12px;line-height:1.7}
+.sa-cover .pills{display:flex;gap:10px;margin-top:28px;justify-content:center;flex-wrap:wrap}
+
+/* ネタ: Magic Phrases */
+.sa-phrases .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px;flex:1}
+.sa-phrases .p-card{
+  border-radius:var(--radius);padding:16px 20px;
+  border-left:4px solid;background:var(--white);
+  box-shadow:0 1px 4px rgba(0,0,0,.04);
+}
+.sa-phrases .p-card .situation{font-size:12px;color:var(--mute);font-weight:600;margin-bottom:4px}
+.sa-phrases .p-card .phrase{font-size:16px;color:var(--ink);font-weight:700;line-height:1.5;margin-bottom:4px}
+.sa-phrases .p-card .why{font-size:12px;color:var(--sub);line-height:1.5}
+
+/* ネタ: Before/After集 */
+.sa-ba .cases{display:flex;flex-direction:column;gap:12px;margin-top:10px;flex:1}
+.sa-ba .case-row{
+  display:flex;gap:14px;align-items:stretch;
+}
+.sa-ba .case-label{
+  flex:0 0 120px;display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:700;color:var(--white);
+  border-radius:var(--radius-sm);
+}
+.sa-ba .case-bad,.sa-ba .case-good{
+  flex:1;border-radius:var(--radius-sm);padding:12px 16px;
+  font-size:14px;line-height:1.6;
+}
+.sa-ba .case-bad{background:var(--red-light);color:#6b2b2b;border:1px solid #f5c6cb}
+.sa-ba .case-good{background:var(--green-light);color:#22543d;border:1px solid #a7e8c0}
+.sa-ba .case-header{display:flex;gap:14px;margin-top:10px;margin-bottom:4px}
+.sa-ba .case-header span{
+  flex:0 0 120px;
+}
+.sa-ba .case-header .h-bad,.sa-ba .case-header .h-good{
+  flex:1;font-size:12px;font-weight:700;letter-spacing:1px;
+  padding-left:16px;
+}
+.sa-ba .case-header .h-bad{color:var(--red)}
+.sa-ba .case-header .h-good{color:var(--green)}
+
+/* ネタ: Cheat Sheet */
+.sa-cheat .rules{
+  display:grid;grid-template-columns:1fr 1fr;gap:14px;
+  margin-top:12px;flex:1;
+}
+.sa-cheat .rule{
+  border-radius:var(--radius);padding:18px 22px;
+  background:var(--bg);border:1px solid var(--border);
+}
+.sa-cheat .rule .num{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:28px;height:28px;border-radius:50%;
+  font-size:14px;font-weight:800;color:var(--white);
+  margin-right:10px;vertical-align:middle;
+}
+.sa-cheat .rule .title{font-size:16px;font-weight:700;color:var(--ink);vertical-align:middle}
+.sa-cheat .rule .desc{font-size:13px;color:var(--sub);margin-top:6px;line-height:1.6;padding-left:38px}
+
+/* ネタ: 危険ワード */
+.sa-danger .words{display:flex;flex-direction:column;gap:10px;margin-top:14px;flex:1}
+.sa-danger .word-row{
+  display:flex;gap:16px;align-items:stretch;
+}
+.sa-danger .word-card{
+  flex:0 0 200px;
+  background:var(--red-light);border:2px solid #f5c6cb;
+  border-radius:var(--radius);
+  padding:14px 18px;text-align:center;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+}
+.sa-danger .word-card .emoji{font-size:24px;margin-bottom:4px}
+.sa-danger .word-card .w{font-size:18px;font-weight:700;color:var(--red)}
+.sa-danger .word-explain{
+  flex:1;
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:14px 20px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.sa-danger .word-explain .problem{font-size:14px;color:var(--ink);font-weight:600;margin-bottom:4px}
+.sa-danger .word-explain .better{font-size:14px;color:var(--green);font-weight:600}
+.sa-danger .word-explain .better::before{content:'→ '}
+
+/* ══════════════════════════════
+   Slide Title (shared)
+   ══════════════════════════════ */
+.slide-title{
+  font-size:26px;font-weight:800;color:var(--ink);
+  margin-bottom:8px;
+  padding-bottom:10px;
+  border-bottom:2px solid var(--border);
+}
+.slide-title .emoji{margin-right:10px}
+.slide-title .sub{
+  font-size:14px;color:var(--mute);font-weight:500;
+  margin-left:12px;
+}
+
+/* ═══ Controls ═══ */
+.controls{
+  position:fixed;bottom:16px;left:50%;transform:translateX(-50%);
+  display:flex;align-items:center;gap:12px;z-index:100;
+  background:rgba(35,39,47,.88);backdrop-filter:blur(12px);
+  padding:6px 18px;border-radius:99px;
+  box-shadow:0 4px 20px rgba(0,0,0,.18);
+}
+.controls button{
+  background:none;border:none;color:rgba(255,255,255,.65);
+  font-size:18px;cursor:pointer;
+  width:32px;height:32px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .15s;
+}
+.controls button:hover{background:rgba(255,255,255,.1);color:#fff}
+.controls .ind{
+  color:rgba(255,255,255,.45);font-size:12px;min-width:70px;text-align:center;
+  font-weight:500;
+}
+.controls .notes-btn{font-size:12px;width:auto;padding:0 10px;font-weight:600}
+.controls .divider{width:1px;height:20px;background:rgba(255,255,255,.15)}
+.controls .appendix-btn{font-size:11px;width:auto;padding:0 10px;font-weight:600;color:rgba(255,255,255,.45)}
+.controls .appendix-btn:hover{color:#c4b5fd}
+
+.notes-panel{
+  position:fixed;bottom:60px;left:50%;transform:translateX(-50%);
+  width:680px;max-height:260px;
+  background:rgba(35,39,47,.92);backdrop-filter:blur(16px);
+  border-radius:14px;padding:18px 24px;
+  color:rgba(255,255,255,.82);font-size:13.5px;line-height:1.8;
+  overflow-y:auto;z-index:99;
+  box-shadow:0 8px 32px rgba(0,0,0,.25);
+  display:none;white-space:pre-wrap;
+}
+.notes-panel.visible{display:block}
+.notes-panel::-webkit-scrollbar{width:5px}
+.notes-panel::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:3px}
+
+.progress-bar{
+  position:fixed;top:0;left:0;height:3px;z-index:200;
+  background:linear-gradient(90deg,var(--blue),var(--teal),var(--green));
+  transition:width .4s ease;
+}
+
+.kbd-hint{
+  position:fixed;bottom:52px;right:20px;
+  color:rgba(0,0,0,.18);font-size:10px;z-index:50;
+  text-align:right;line-height:1.8;pointer-events:none;
+}
+
+/* ═══════════════════════════════════
+   FullHD (1920×1080) Readability
+   すべてのフォントサイズを拡大
+   ═══════════════════════════════════ */
+
+/* --- Common --- */
+.slide-title{font-size:32px}
+.slide-title .sub{font-size:17px}
+.sec-label{font-size:13px}
+.page-num{font-size:14px}
+.tag{font-size:13px}
+.pill{font-size:15px;padding:6px 16px}
+
+/* --- S1 Title --- */
+.s1 .emoji-big{font-size:60px}
+.s1 h1{font-size:48px}
+.s1 .subtitle{font-size:22px}
+.s1 .meta{font-size:17px}
+
+/* --- S2 Icebreak --- */
+.s2 .emoji-q{font-size:52px}
+.s2 h2{font-size:42px}
+.s2 .ask{font-size:24px}
+.s2 .ex-wrap{gap:14px;margin-top:8px}
+.s2 .ex-chip{font-size:17px;padding:8px 20px}
+.s2 .note-bottom{font-size:17px}
+
+/* --- S3 Today --- */
+.s3 .card-speech p{font-size:20px}
+.s3 .card-feel .text{font-size:24px}
+.s3 .card-feel .emoji{font-size:42px}
+.s3 .goal-card .label{font-size:15px}
+.s3 .goal-card .text{font-size:28px}
+
+/* --- S4 正体 --- */
+.s4 .wrong .x{font-size:24px}
+.s4 .wrong .t{font-size:23px}
+.s4 .right-card .mark{font-size:34px}
+.s4 .right-card .text{font-size:34px}
+.s4 .aside{font-size:19px}
+.s4 .aside em{font-size:19px}
+
+/* --- S5 4要素 --- */
+.s5 .el-card .icon{font-size:36px}
+.s5 .el-card .num{font-size:16px}
+.s5 .el-card .label{font-size:18px}
+.s5 .el-card .desc{font-size:13px}
+.s5 .base .icon{font-size:28px}
+.s5 .base .label{font-size:24px}
+.s5 .base .desc{font-size:15px}
+.s5 .foot{font-size:17px}
+
+/* --- S6 Why --- */
+.s6 .main-msg{font-size:26px}
+.s6 .main-msg .hl{font-size:32px}
+.s6 .bubble{font-size:18px}
+.s6 .bubble .emoji{font-size:32px}
+.s6 .warn p{font-size:24px}
+.s6 .aside{font-size:17px}
+
+/* --- S7 Goal --- */
+.s7 .step .lbl{font-size:14px}
+.s7 .step .txt{font-size:28px}
+.s7 .badge{font-size:17px}
+.s7 .action-box .label{font-size:16px}
+.s7 .action-box ul{font-size:18px}
+
+/* --- S8 Stumble --- */
+.s8 .trap .emoji{font-size:30px}
+.s8 .trap .title{font-size:20px}
+.s8 .trap .desc{font-size:16px}
+.s8 .hint{font-size:17px}
+
+/* --- S9 Practice --- */
+.s9 .pcard .circle{width:46px;height:46px;font-size:22px}
+.s9 .pcard .card-title{font-size:18px}
+.s9 .pcard .phrase .lbl{font-size:12px}
+.s9 .pcard .phrase .txt{font-size:16px}
+
+/* --- S10 Example --- */
+.s10 .scene{font-size:17px}
+.s10 .ex-box .label{font-size:19px}
+.s10 .ex-box .speech{font-size:17px}
+.s10 .pt{font-size:16px}
+
+/* --- S11 Summary --- */
+.s11 .recap-card .icon{font-size:28px}
+.s11 .recap-card .text{font-size:16px}
+.s11 .closing .line{font-size:22px}
+.s11 .closing .line.strong{font-size:26px}
+
+/* --- Appendix --- */
+.sa-cover h2{font-size:42px}
+.sa-cover .sub{font-size:20px}
+.sa-phrases .p-card .situation{font-size:14px}
+.sa-phrases .p-card .phrase{font-size:19px}
+.sa-phrases .p-card .why{font-size:14px}
+.sa-ba .case-label{font-size:16px;flex:0 0 140px}
+.sa-ba .case-bad,.sa-ba .case-good{font-size:16px}
+.sa-ba .case-header .h-bad,.sa-ba .case-header .h-good{font-size:14px}
+.sa-cheat .rule .num{width:32px;height:32px;font-size:16px}
+.sa-cheat .rule .title{font-size:19px}
+.sa-cheat .rule .desc{font-size:16px;padding-left:42px}
+.sa-danger .word-card .w{font-size:21px}
+.sa-danger .word-card .emoji{font-size:28px}
+.sa-danger .word-explain .problem{font-size:17px}
+.sa-danger .word-explain .better{font-size:17px}
+
+@media print{
+  body{background:#fff}
+  .controls,.notes-panel,.progress-bar,.kbd-hint{display:none!important}
+  .slide{position:relative!important;opacity:1!important;pointer-events:auto!important;page-break-after:always;display:flex!important}
+  .slide-inner{box-shadow:none;border:1px solid #ddd}
+  .deck{height:auto;overflow:visible}
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+<div class="deck" id="deck">
+
+<!-- ═══ 1. タイトル ═══ -->
+<div class="slide active" data-notes="【1分】
+「入社おめでとうございます。開発事業本部の岩崎です」
+「今日は30分だけ、コミュニケーションの話をします」
+「入社式で何度も聞いたと思います。でも具体的に何をすればいいか、ちょっと困りませんか？」
+「今日はそれを一緒に整理しましょう。堅い話じゃないので安心してください」">
+  <div class="slide-inner s1">
+    <div class="hdr"></div>
+    <div class="body">
+      <div class="emoji-big">💬</div>
+      <h1>企業人としての<br><span>コミュニケーション</span>とは何か</h1>
+      <div class="subtitle">―「コミュニケーションが大事」を、明日の行動に変える30分 ―</div>
+      <div class="meta">2026年4月1日<br>開発事業本部　副本部長　岩崎 達也</div>
+    </div>
+    <div class="deco"></div>
+  </div>
+</div>
+
+<!-- ═══ 2. アイスブレイク ═══ -->
+<div class="slide" data-notes="【3分】
+「本題の前に、ちょっと聞かせてください」
+「"コミュニケーション"って言われて、パッと浮かぶイメージは？ひとことでOKです」
+→ 5人なので一人ずつ名前を呼んで振る
+→ どんな回答も「いいですね」「なるほど」で受け止める
+→ 全員が答えたら「ありがとうございます。どれも間違いじゃないです。ただ仕事の場面ではもう少し具体的に考える必要がある。今日はその話をします」
+
+★沈黙が続いたら「難しく考えなくて大丈夫です。一言で」
+★ここでの回答を Slide 5 で回収すると効果的">
+  <div class="slide-inner s2">
+    <div class="hdr"></div>
+    <div class="body">
+      <div class="emoji-q">🤔</div>
+      <h2>あなたにとって<br>「コミュニケーション」とは？</h2>
+      <div class="ask">ひとこと で教えてください</div>
+      <div class="ex-wrap">
+        <span class="ex-chip">会話すること</span>
+        <span class="ex-chip">気持ちを伝えること</span>
+        <span class="ex-chip">相手の話を聞くこと</span>
+        <span class="ex-chip">仲良くなること</span>
+        <span class="ex-chip">…？</span>
+      </div>
+      <div class="note-bottom">正解はありません。思ったことをそのまま。</div>
+    </div>
+    <span class="page-num">2 / 11</span>
+  </div>
+</div>
+
+<!-- ═══ 3. 今日の研修 ═══ -->
+<div class="slide" data-notes="【2分】
+「入社式で何回くらい『コミュニケーション』って聞きましたか？」
+「僕も新人の頃、正直よく分かりませんでした。雑談を増やせばいいのか？飲み会に行けばいいのか？」
+「実はコミュニケーションには明確な構造があって、スキルとして身につけられるものです」
+「今日はそれを一緒に整理しましょう」">
+  <div class="slide-inner s3">
+    <div class="hdr"></div>
+    <div class="body">
+      <div class="slide-title"><span class="emoji">📋</span>今日の研修について</div>
+      <div class="top-row">
+        <div class="card-speech">
+          <div class="sec-label">入社式でよく聞く話</div>
+          <p>「コミュニケーションが大事です」<br>「周りとしっかりコミュニケーションを<br>　取ってください」</p>
+        </div>
+        <div class="card-feel">
+          <div class="inner">
+            <div class="emoji">😐</div>
+            <div class="text">「で、具体的に<br>何をすれば…？」</div>
+          </div>
+        </div>
+      </div>
+      <div class="goal-card">
+        <div class="label">TODAY'S GOAL</div>
+        <div class="text">「コミュニケーション」を分解して、明日からの行動に変える</div>
+      </div>
+    </div>
+    <span class="page-num">3 / 11</span>
+  </div>
+</div>
+
+<!-- ═══ 4. 正体 ═══ -->
+<div class="slide" data-notes="【3分】
+「まず正体をハッキリさせます」
+「学生時代のコミュニケーションは"楽しむ"ためのもの。仕事のコミュニケーションは目的が違います」
+「もちろん雑談や仲の良さも大事。でもそれは土台であってゴールではありません」
+「そして重要なのは、これは才能じゃなく技術。口下手でも全然大丈夫。学べば身につきます」
+「逆に、おしゃべりが得意＝仕事のコミュニケーションが上手い、ではないんです」
+
+★アイスブレイク回収：「さっき皆さんが答えてくれたこと、どれも大事な要素です。ただ仕事では、その先に"前に進める"という目的がある」">
+  <div class="slide-inner s4">
+    <div class="hdr"></div>
+    <div class="body">
+      <div class="slide-title"><span class="emoji">🔍</span>コミュニケーションの正体</div>
+      <div class="wrong-list">
+        <div class="wrong"><span class="x">✕</span><span class="t">仲良く話すこと</span></div>
+        <div class="wrong"><span class="x">✕</span><span class="t">たくさん会話すること</span></div>
+        <div class="wrong"><span class="x">✕</span><span class="t">明るく元気にふるまうこと</span></div>
+      </div>
+      <div class="divider"></div>
+      <div class="right-card">
+        <span class="mark">◎</span><span class="text">仕事を前に進めるための技術</span>
+      </div>
+      <div class="aside">コミュニケーションは<em>才能ではなく技術</em>。<br>口下手でも大丈夫。学べば誰でも身につく。</div>
+    </div>
+    <span class="page-num">4 / 11</span>
+  </div>
+</div>
+
+<!-- ═══ 5. 4要素 ═══ -->
+<div class="slide" data-notes="【4分】
+「4つに分解します」
+
+① 信頼関係をつくる
+  「土台です。挨拶する、約束守る、嘘つかない。これがないとどんなに正しいことを言っても伝わらない」
+  「新人のうちは"ちゃんとした人だ"と思ってもらうのが第一歩。朝の挨拶、期限を守る、分からないことを分からないと言える。それだけで信頼は積み上がります」
+
+② 自分の考え・状況を伝える
+  「頭の中にあるだけでは伝わらない。"言わなくても分かるだろう"は仕事では通用しません」
+
+③ 相手の考え・状況を理解する
+  「聞くだけじゃなく"理解する"。相手が何を前提に話しているかを把握する」
+
+④ 相手に合わせて伝え方を変える
+  「上司と同期とお客様では伝え方が変わる。システム開発では特に重要」">
+  <div class="slide-inner s5">
+    <div class="hdr"></div>
+    <div class="body">
+      <div class="slide-title"><span class="emoji">🧩</span>企業人のコミュニケーション<span class="sub">― 4つの構成要素 ―</span></div>
+      <div class="cards">
+        <div class="el-card" style="border-color:var(--blue)">
+          <div class="icon">🗣️</div>
+          <div class="num" style="color:var(--blue)">②</div>
+          <div class="label">自分の考え・状況を<br>伝える</div>
+          <div class="desc">頭の中を言葉にして共有</div>
+        </div>
+        <div class="el-card" style="border-color:var(--teal)">
+          <div class="icon">👂</div>
+          <div class="num" style="color:var(--teal)">③</div>
+          <div class="label">相手の考え・状況を<br>理解する</div>
+          <div class="desc">聞く → 理解する</div>
+        </div>
+        <div class="el-card" style="border-color:var(--purple)">
+          <div class="icon">🔄</div>
+          <div class="num" style="color:var(--purple)">④</div>
+          <div class="label">相手に合わせて<br>伝え方を変える</div>
+          <div class="desc">上司・同期・お客様で変える</div>
+        </div>
+      </div>
+      <div class="arrows">▼ ▼ ▼</div>
+      <div class="base">
+        <span class="icon">🤝</span>
+        <div class="label">① 信頼関係をつくる（ラポール）</div>
+        <div class="desc">すべての土台 ― 挨拶をする、約束を守る、分からないことを分からないと言える</div>
+      </div>
+      <div class="foot">① がすべての土台。② ③ ④ は日々の実践で磨く。</div>
+    </div>
+    <span class="page-num">5 / 11</span>
+  </div>
+</div>
+
+<!-- ═══ 6. なぜ重要 ═══ -->
+<div class="slide" data-notes="【3分】
+「ここが今日一番伝えたいことの一つです」
+「これから経験するトラブルの多くは、スキル不足より"認識のズレ"から起こります」
+「例えば、先輩に『今日中にお願い』と言われて"終業まで"と思った。でも先輩は"午前中"のつもりだった。これだけで仕事が遅れる」
+「システム開発では、お客様の求めるものと作っているものがズレたら、何ヶ月もやり直し」
+「つまりコミュニケーションは"気持ちの問題"じゃなく"品質と効率の問題"なんです」">
+  <div class="slide-inner s6">
+    <div class="hdr"></div>
+    <div class="body">
+      <div class="slide-title"><span class="emoji">⚠️</span>なぜこれほど重要なのか</div>
+      <div class="main-msg">
+        仕事のトラブルの多くは「能力不足」ではなく<br><span class="hl">「認識のズレ」</span>から起きる
+      </div>
+      <div class="bubbles">
+        <div class="bubble"><span class="emoji">😮</span>「言ったはずなのに、<br>伝わっていない」</div>
+        <div class="bubble"><span class="emoji">😳</span>「聞いたつもりだったが、<br>違う意味だった」</div>
+        <div class="bubble"><span class="emoji">😰</span>「大丈夫だと思っていたのに、<br>大丈夫じゃなかった」</div>
+      </div>
+      <div class="warn"><p>認識がズレたまま仕事が進むと、あとから大きな手戻りになる。</p></div>
+      <div class="aside">コミュニケーションは「気持ちの問題」ではなく「品質と効率の問題」。</div>
+    </div>
+    <span class="page-num">6 / 11</span>
+  </div>
+</div>
+
+<!-- ═══ 7. ゴール ═══ -->
+<div class="slide" data-notes="【2分】
+「コミュニケーションにはゴールがあります。2段階です」
+
+STEP 1：認識をそろえる
+  「相手と自分が同じ理解をしている状態をつくる。これが最低限のゴール」
+  「"私はこう理解していますが合っていますか？"で、ズレの大半は防げます」
+
+STEP 2：行動につなげる
+  「上司に相談するのは判断してもらうため。進捗報告は安心してもらうため」
+
+「新人のうちはまずSTEP 1を意識してください。それだけで仕事の質が大きく変わります」">
+  <div class="slide-inner s7">
+    <div class="hdr"></div>
+    <div class="body">
+      <div class="slide-title"><span class="emoji">🎯</span>コミュニケーションのゴール</div>
+      <div class="flow">
+        <div class="flow-left">
+          <div class="step-wrap">
+            <div class="step a">
+              <div class="lbl">STEP 1</div>
+              <div class="txt">相手と認識をそろえる</div>
+            </div>
+            <div class="badge">← まずここ！</div>
+          </div>
+          <div class="arrow-d">▼</div>
+          <div class="step b">
+            <div class="lbl">STEP 2</div>
+            <div class="txt">必要に応じて<br>相手の行動につなげる</div>
+          </div>
+        </div>
+        <div class="action-box">
+          <div class="label">行動につなげるとは：</div>
+          <ul>
+            <li>協力してもらう</li>
+            <li>相談にのってもらう</li>
+            <li>安心してもらう</li>
+            <li>判断・決定してもらう</li>
+            <li>次のアクションを起こしてもらう</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <span class="page-num">7 / 11</span>
+  </div>
+</div>
+
+<!-- ═══ 8. つまずき ═══ -->
+<div class="slide" data-notes="【3分】
+「ここからは"あるある"です。自分に当てはまるかも、と思いながら聞いてください」
+
+①「大丈夫です」問題
+  「本当に全員やります。でも60%しか分かってない。その40%が後で問題になる」
+  「『大丈夫です』は仕事で一番危険な言葉の一つ」
+
+② 質問できない
+  「先輩からすると、聞いてくれないほうがずっと困る。3日後に"実は分かってません"のほうがダメージ大」
+
+③ 相談が遅れる
+  「"15分調べて分からなかったら聞く"など、自分でルールを決めておく」
+
+④ 結論が伝わらない
+  「次のスライドで対処法を伝えます」">
+  <div class="slide-inner s8">
+    <div class="hdr"></div>
+    <div class="body">
+      <div class="slide-title"><span class="emoji">😱</span>新人がつまずきやすい4つの場面</div>
+      <div class="grid">
+        <div class="trap" style="border-left-color:var(--red)">
+          <div class="top"><span class="emoji">😰</span><span class="title">「大丈夫です」と反射的に言ってしまう</span></div>
+          <div class="desc">→ 本当は分かっていないのに、聞き返せない</div>
+        </div>
+        <div class="trap" style="border-left-color:var(--orange)">
+          <div class="top"><span class="emoji">😶</span><span class="title">分からないのに質問できない</span></div>
+          <div class="desc">→ 「こんなこと聞いたら迷惑かも」と思ってしまう</div>
+        </div>
+        <div class="trap" style="border-left-color:#d69e2e">
+          <div class="top"><span class="emoji">🕐</span><span class="title">相談・報告が遅れる</span></div>
+          <div class="desc">→ 「もう少し自分でやってから…」と抱え込む</div>
+        </div>
+        <div class="trap" style="border-left-color:var(--blue)">
+          <div class="top"><span class="emoji">🌀</span><span class="title">話が長くなり、結論が伝わらない</span></div>
+          <div class="desc">→ 経緯から話してしまい、相手が迷子になる</div>
+        </div>
+      </div>
+      <div class="hint">心当たりありませんか？　→ 次のスライドで対処法をお伝えします</div>
+    </div>
+    <span class="page-num">8 / 11</span>
+  </div>
+</div>
+
+<!-- ═══ 9. 実践3つ ═══ -->
+<div class="slide" data-notes="【3分】
+「ここが今日一番持ち帰ってほしい部分です」
+
+1. 早めに聞く
+  「恥ずかしいのは最初の3秒だけ。聞かなかったことで起きる問題のほうがずっと大きい」
+  「『分かりません』だけでなく『○○の部分が分かりません』と具体的に」
+  「ただし自分で調べられることは調べてから。その姿勢は見られている」
+
+2. 結論→理由→困っていること
+  「日本語は結論が後に来やすい。意識的に先に持ってくる」
+  「上司は忙しい。最初の一文で"何の話か"分かるだけで助かる」
+
+3. ズレそうな時に報連相
+  「"念のため確認ですが"は魔法の言葉。使いすぎて困ることはない」
+  「確認して合ってたら、それはズレを防いだということ。胸を張っていい」">
+  <div class="slide-inner s9">
+    <div class="hdr"></div>
+    <div class="body">
+      <div class="slide-title"><span class="emoji">🚀</span>明日から実践する3つのこと<span class="sub">― 今日一番持ち帰ってほしい ―</span></div>
+      <div class="cards">
+        <div class="pcard" style="border-color:var(--blue)">
+          <div class="head">
+            <div class="circle" style="background:var(--blue)">1</div>
+            <div class="card-title">分からないことは、<br>早めに聞く</div>
+          </div>
+          <div class="phrase" style="background:var(--blue-light)">
+            <div class="lbl">PHRASE</div>
+            <div class="txt">「すみません、○○の部分を<br>もう少し教えていただけますか」</div>
+          </div>
+        </div>
+        <div class="pcard" style="border-color:var(--teal)">
+          <div class="head">
+            <div class="circle" style="background:var(--teal)">2</div>
+            <div class="card-title">結論 → 理由 → 困っていること<br>の順で話す</div>
+          </div>
+          <div class="phrase" style="background:var(--teal-light)">
+            <div class="lbl">PHRASE</div>
+            <div class="txt">「結論から言うと、○○の件で<br>相談があります。理由は〜で、<br>今〜に困っています」</div>
+          </div>
+        </div>
+        <div class="pcard" style="border-color:var(--green)">
+          <div class="head">
+            <div class="circle" style="background:var(--green)">3</div>
+            <div class="card-title">報連相は、ズレそうだと<br>感じた時点でする</div>
+          </div>
+          <div class="phrase" style="background:var(--green-light)">
+            <div class="lbl">PHRASE</div>
+            <div class="txt">「念のため確認なのですが、<br>○○は△△という理解で<br>合っていますか？」</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <span class="page-num">9 / 11</span>
+  </div>
+</div>
+
+<!-- ═══ 10. 具体例 ═══ -->
+<div class="slide" data-notes="【3分】
+（悪い例を読み上げる）
+「これ、何が問題か分かりますか？　上司は最後まで聞かないと何の話か分からない」
+
+（良い例を読み上げる）
+「最初の一文で何の話か分かる。次にどれくらい遅れるか。最後にどうしてほしいか」
+「上司からすると判断に必要な情報が全部揃っている」
+
+「最初からきれいに話せなくて大丈夫。意識するだけで少しずつ変わります」">
+  <div class="slide-inner s10">
+    <div class="hdr"></div>
+    <div class="body">
+      <div class="slide-title"><span class="emoji">💡</span>具体例：こう変えるだけで伝わる</div>
+      <div class="scene">【場面】作業が予定より遅れていて、上司に報告する</div>
+      <div class="compare">
+        <div class="ex-box bad">
+          <div class="label">😵 伝わりにくい例</div>
+          <div class="speech">「あの、すみません、えっと、昨日の○○の件なんですけど、ドキュメントを読んでいたら分からないところがあって、調べていたんですが、なかなか進まなくて、それで、えっと、ちょっと遅れそうで…」</div>
+        </div>
+        <div class="ex-box good">
+          <div class="label">😊 伝わる例</div>
+          <div class="speech">「○○の件で報告です。<br>予定より半日ほど遅れそうです。<br>原因は、ドキュメントの△△の部分の理解に時間がかかっているためです。<br>△△について教えていただくか、参考資料があれば教えていただけますか？」</div>
+        </div>
+      </div>
+      <div class="points">
+        <div class="pt" style="border-color:var(--blue)">→ 結論が最初にある</div>
+        <div class="pt" style="border-color:var(--teal)">→ 状況が具体的</div>
+        <div class="pt" style="border-color:var(--green)">→ してほしいことが明確</div>
+      </div>
+    </div>
+    <span class="page-num">10 / 11</span>
+  </div>
+</div>
+
+<!-- ═══ 11. まとめ ═══ -->
+<div class="slide" data-notes="【3分】
+「最後にまとめます」（カードを順に指しながら）
+「今日話したことは特別に難しいことじゃない。でも意識しないとなかなかできない」
+「最初から完璧にやろうとしなくていい。先輩たちも最初からできたわけじゃない。僕もそうだった」
+「ただ、"意識している人"と"していない人"では、半年後に大きな差がつきます」
+「そして皆さんには同期が5人いる。心強いことです。困ったら同期にも相談してください」
+「今日の研修が、明日からの行動に少しでもつながれば嬉しいです。ありがとうございました」">
+  <div class="slide-inner s11">
+    <div class="hdr"></div>
+    <div class="body">
+      <div class="slide-title"><span class="emoji">📝</span>まとめ</div>
+      <div class="recap">
+        <div class="recap-card" style="border-color:var(--blue)">
+          <span class="top-bar" style="background:var(--blue)"></span>
+          <div class="icon">💬</div>
+          <div class="text">コミュニケーション<br>＝ 仕事を前に進める技術</div>
+        </div>
+        <div class="recap-card" style="border-color:var(--teal)">
+          <span class="top-bar" style="background:var(--teal)"></span>
+          <div class="icon">🧩</div>
+          <div class="text">4つの構成要素<br>信頼 → 伝える<br>→ 理解 → 合わせる</div>
+        </div>
+        <div class="recap-card" style="border-color:var(--green)">
+          <span class="top-bar" style="background:var(--green)"></span>
+          <div class="icon">🎯</div>
+          <div class="text">ゴール<br>認識をそろえ、<br>行動につなげる</div>
+        </div>
+        <div class="recap-card" style="border-color:var(--purple)">
+          <span class="top-bar" style="background:var(--purple)"></span>
+          <div class="icon">🚀</div>
+          <div class="text">明日からやること<br>① 早めに聞く<br>② 結論から話す<br>③ ズレそうな時に報連相</div>
+        </div>
+      </div>
+      <div class="closing">
+        <div class="line">コミュニケーションは才能ではなく技術。</div>
+        <div class="line">最初から完璧でなくていい。失敗しながら身につければいい。</div>
+        <div class="line strong">5人の同期がいる。支え合ってください。</div>
+      </div>
+    </div>
+    <span class="page-num">11 / 11</span>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════
+     APPENDIX ― ネタ集（時間外コンテンツ）
+     ══════════════════════════════════════════════════ -->
+
+<!-- Appendix Cover -->
+<div class="slide" data-notes="ここからはAppendix（ネタ集）です。研修の30分には含めず、配布資料として使うか、時間が余った場合に活用してください。">
+  <div class="slide-inner sa-cover appendix">
+    <div class="hdr"></div>
+    <div class="body">
+      <div class="emoji-big">📦</div>
+      <h2>Appendix ― ネタ集</h2>
+      <div class="sub">研修の時間外コンテンツです。<br>配布用、または時間が余ったときに。</div>
+      <div class="pills">
+        <span class="pill" style="background:var(--purple-light);color:var(--purple)">🪄 魔法のフレーズ集</span>
+        <span class="pill" style="background:var(--green-light);color:var(--green)">🔄 Before / After 集</span>
+        <span class="pill" style="background:var(--blue-light);color:var(--blue)">📋 コミュニケーション・チートシート</span>
+        <span class="pill" style="background:var(--red-light);color:var(--red)">🚨 新人キケンワード辞典</span>
+      </div>
+    </div>
+    <span class="page-num">A-0</span>
+  </div>
+</div>
+
+<!-- A-1: 魔法のフレーズ集 -->
+<div class="slide" data-notes="そのまま使えるフレーズ集です。丸暗記でOK。">
+  <div class="slide-inner sa-phrases appendix">
+    <div class="hdr"></div>
+    <div class="body">
+      <div class="slide-title"><span class="emoji">🪄</span>魔法のフレーズ集<span class="sub">― そのまま使えるテンプレート ―</span></div>
+      <div class="grid">
+        <div class="p-card" style="border-left-color:var(--blue)">
+          <div class="situation">✅ 指示を受けたとき</div>
+          <div class="phrase">「○○を△△までに□□の形式で、という理解で合っていますか？」</div>
+          <div class="why">→ 復唱確認するだけでズレの大半を防げる</div>
+        </div>
+        <div class="p-card" style="border-left-color:var(--teal)">
+          <div class="situation">✅ 分からないとき</div>
+          <div class="phrase">「○○の部分がまだ理解しきれていないのですが、教えていただけますか？」</div>
+          <div class="why">→ 「分かりません」だけより、相手が答えやすい</div>
+        </div>
+        <div class="p-card" style="border-left-color:var(--green)">
+          <div class="situation">✅ 相談するとき</div>
+          <div class="phrase">「○○の件で相談があります。今お時間よろしいですか？」</div>
+          <div class="why">→ まず許可を取る。忙しければ「あと10分後に」と言ってもらえる</div>
+        </div>
+        <div class="p-card" style="border-left-color:var(--orange)">
+          <div class="situation">✅ 遅れそうなとき</div>
+          <div class="phrase">「○○が予定より遅れそうです。原因は△△で、□□をすれば間に合いそうですが、いかがでしょうか？」</div>
+          <div class="why">→ 遅れの報告 + 原因 + リカバリ案のセット</div>
+        </div>
+        <div class="p-card" style="border-left-color:var(--purple)">
+          <div class="situation">✅ 認識を確認するとき</div>
+          <div class="phrase">「念のため確認ですが、○○は△△という理解で合っていますか？」</div>
+          <div class="why">→ 万能フレーズ。使いすぎて困ることは絶対にない</div>
+        </div>
+        <div class="p-card" style="border-left-color:var(--red)">
+          <div class="situation">✅ 調べても分からなかったとき</div>
+          <div class="phrase">「○○について調べたのですが、△△まで分かって□□が分かりません。ヒントをいただけますか？」</div>
+          <div class="why">→ 「調べた」姿勢を見せる + 具体的に詰まった箇所を伝える</div>
+        </div>
+      </div>
+    </div>
+    <span class="page-num">A-1</span>
+  </div>
+</div>
+
+<!-- A-2: Before/After集 -->
+<div class="slide" data-notes="場面別のBefore/After。研修内のSlide10で足りなかった分をここで補完。">
+  <div class="slide-inner sa-ba appendix">
+    <div class="hdr"></div>
+    <div class="body">
+      <div class="slide-title"><span class="emoji">🔄</span>Before / After 集<span class="sub">― こう変えるだけで変わる ―</span></div>
+      <div class="case-header">
+        <span></span>
+        <span class="h-bad">✕ Before</span>
+        <span class="h-good">◎ After</span>
+      </div>
+      <div class="cases">
+        <div class="case-row">
+          <div class="case-label" style="background:var(--blue)">指示を受けた</div>
+          <div class="case-bad">「分かりました」（とだけ言って席に戻る）</div>
+          <div class="case-good">「○○を△△までに□□形式で、という理解で合っていますか？」</div>
+        </div>
+        <div class="case-row">
+          <div class="case-label" style="background:var(--teal)">進捗を聞かれた</div>
+          <div class="case-bad">「順調です」（本当は少し不安がある）</div>
+          <div class="case-good">「○○まで完了。△△で少し詰まっていて、午前中に解決しなければ相談させてください」</div>
+        </div>
+        <div class="case-row">
+          <div class="case-label" style="background:var(--orange)">用語が分からない</div>
+          <div class="case-bad">（分からないけど、後で調べればいいか…）</div>
+          <div class="case-good">「○○という言葉が出たのですが、これは△△のことですか？ それとも別の意味ですか？」</div>
+        </div>
+        <div class="case-row">
+          <div class="case-label" style="background:var(--purple)">エラーで詰まった</div>
+          <div class="case-bad">（2時間黙って格闘し続ける）</div>
+          <div class="case-good">「エラーが出ています。△△と□□を試しましたが解決しません。他に確認すべきことはありますか？」</div>
+        </div>
+      </div>
+    </div>
+    <span class="page-num">A-2</span>
+  </div>
+</div>
+
+<!-- A-3: チートシート -->
+<div class="slide" data-notes="デスクに貼っておけるチートシート。新人の行動指針。">
+  <div class="slide-inner sa-cheat appendix">
+    <div class="hdr"></div>
+    <div class="body">
+      <div class="slide-title"><span class="emoji">📋</span>コミュニケーション・チートシート<span class="sub">― デスクに貼っておこう ―</span></div>
+      <div class="rules">
+        <div class="rule">
+          <span class="num" style="background:var(--blue)">1</span>
+          <span class="title">15分ルール</span>
+          <div class="desc">15分調べて分からなかったら聞く。<br>それは「諦め」じゃなく「正しい判断」。</div>
+        </div>
+        <div class="rule">
+          <span class="num" style="background:var(--teal)">2</span>
+          <span class="title">復唱確認</span>
+          <div class="desc">指示を受けたら、必ず自分の言葉で言い直して確認する。<br>「○○ということですね？」だけでOK。</div>
+        </div>
+        <div class="rule">
+          <span class="num" style="background:var(--green)">3</span>
+          <span class="title">結論ファースト</span>
+          <div class="desc">報告・相談は「結論 → 理由 → 困っていること」。<br>経緯は聞かれてから話す。</div>
+        </div>
+        <div class="rule">
+          <span class="num" style="background:var(--orange)">4</span>
+          <span class="title">予防の報連相</span>
+          <div class="desc">「あれ？」と思ったら、その場で確認。<br>「念のため確認ですが」は無限に使っていい。</div>
+        </div>
+        <div class="rule">
+          <span class="num" style="background:var(--purple)">5</span>
+          <span class="title">朝イチの挨拶</span>
+          <div class="desc">「おはようございます」を毎日全員に。<br>それだけで信頼の土台が積み上がる。</div>
+        </div>
+        <div class="rule">
+          <span class="num" style="background:var(--red)">6</span>
+          <span class="title">「大丈夫です」禁止令</span>
+          <div class="desc">反射で言わない。代わりに<br>「○○まで分かりました。△△はもう一度お願いできますか？」</div>
+        </div>
+      </div>
+    </div>
+    <span class="page-num">A-3</span>
+  </div>
+</div>
+
+<!-- A-4: 危険ワード辞典 -->
+<div class="slide" data-notes="新人が無意識に使いがちなキケンワードと、その言い換え。ちょっと面白おかしく紹介するとウケが良い。">
+  <div class="slide-inner sa-danger appendix">
+    <div class="hdr"></div>
+    <div class="body">
+      <div class="slide-title"><span class="emoji">🚨</span>新人キケンワード辞典<span class="sub">― 無意識に使ってませんか？ ―</span></div>
+      <div class="words">
+        <div class="word-row">
+          <div class="word-card">
+            <div class="emoji">😰</div>
+            <div class="w">「大丈夫です」</div>
+          </div>
+          <div class="word-explain">
+            <div class="problem">本当に大丈夫な確率、体感30%。残り70%は後で火を吹く。</div>
+            <div class="better">「○○まで分かりました。△△をもう一度いいですか？」</div>
+          </div>
+        </div>
+        <div class="word-row">
+          <div class="word-card">
+            <div class="emoji">🤔</div>
+            <div class="w">「たぶん大丈夫です」</div>
+          </div>
+          <div class="word-explain">
+            <div class="problem">「たぶん」が付いた時点で大丈夫じゃない説。確認しよう。</div>
+            <div class="better">「念のため確認させてください。○○は△△で合ってますか？」</div>
+          </div>
+        </div>
+        <div class="word-row">
+          <div class="word-card">
+            <div class="emoji">😅</div>
+            <div class="w">「なんとかなると<br>思います」</div>
+          </div>
+          <div class="word-explain">
+            <div class="problem">根拠なき楽観。なんとかならなかった時のダメージは自分だけじゃ済まない。</div>
+            <div class="better">「現時点では○○の状況です。リスクとして△△があります」</div>
+          </div>
+        </div>
+        <div class="word-row">
+          <div class="word-card">
+            <div class="emoji">🫣</div>
+            <div class="w">「（沈黙）」</div>
+          </div>
+          <div class="word-explain">
+            <div class="problem">分からないのに何も言わない。相手は「理解した」と解釈する。一番危険。</div>
+            <div class="better">「すみません、○○の部分がまだ理解できていないです」</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <span class="page-num">A-4</span>
+  </div>
+</div>
+
+</div><!-- .deck -->
+
+<!-- ═══ Controls ═══ -->
+<div class="controls">
+  <button id="btnPrev" aria-label="前へ">◀</button>
+  <span class="ind" id="indicator">1 / 11</span>
+  <button id="btnNext" aria-label="次へ">▶</button>
+  <div class="divider"></div>
+  <button class="notes-btn" id="btnNotes">Notes</button>
+  <button class="appendix-btn" id="btnAppendix">Appendix →</button>
+</div>
+
+<div class="notes-panel" id="notesPanel"></div>
+
+<div class="kbd-hint">← → スライド移動 ／ N ノート ／ F フルスクリーン</div>
+
+<script>
+(() => {
+  const slides = [...document.querySelectorAll('.slide')];
+  const total = slides.length;
+  const mainCount = 11;
+  const indicator = document.getElementById('indicator');
+  const notesPanel = document.getElementById('notesPanel');
+  const progressBar = document.getElementById('progressBar');
+  let current = 0;
+  let notesVisible = false;
+
+  function label(n) {
+    if (n < mainCount) return `${n + 1} / ${mainCount}`;
+    if (n === mainCount) return 'A-0';
+    return `A-${n - mainCount}`;
+  }
+
+  function goto(n) {
+    if (n < 0 || n >= total) return;
+    slides[current].classList.remove('active');
+    current = n;
+    slides[current].classList.add('active');
+    indicator.textContent = label(current);
+    progressBar.style.width = `${((current + 1) / total) * 100}%`;
+    if (notesVisible) showNotes();
+  }
+
+  function showNotes() {
+    notesPanel.textContent = slides[current].getAttribute('data-notes') || '（ノートなし）';
+    notesPanel.classList.add('visible');
+    notesVisible = true;
+  }
+  function hideNotes() { notesPanel.classList.remove('visible'); notesVisible = false; }
+  function toggleNotes() { notesVisible ? hideNotes() : showNotes(); }
+
+  document.getElementById('btnPrev').addEventListener('click', () => goto(current - 1));
+  document.getElementById('btnNext').addEventListener('click', () => goto(current + 1));
+  document.getElementById('btnNotes').addEventListener('click', toggleNotes);
+  document.getElementById('btnAppendix').addEventListener('click', () => goto(mainCount));
+
+  document.addEventListener('keydown', e => {
+    if (['ArrowRight','ArrowDown',' ','PageDown'].includes(e.key)) { e.preventDefault(); goto(current + 1); }
+    if (['ArrowLeft','ArrowUp','PageUp'].includes(e.key)) { e.preventDefault(); goto(current - 1); }
+    if (e.key === 'Home') { e.preventDefault(); goto(0); }
+    if (e.key === 'End') { e.preventDefault(); goto(total - 1); }
+    if (e.key === 'n' || e.key === 'N') toggleNotes();
+    if (e.key === 'f' || e.key === 'F') {
+      document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+    }
+  });
+
+  let tx = 0;
+  document.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; });
+  document.addEventListener('touchend', e => {
+    const d = e.changedTouches[0].screenX - tx;
+    if (Math.abs(d) > 50) d < 0 ? goto(current + 1) : goto(current - 1);
+  });
+
+  function scale() {
+    const s = Math.min(innerWidth / 1280, innerHeight / 720) * 0.97;
+    document.querySelectorAll('.slide-inner').forEach(el => { el.style.transform = `scale(${s})`; });
+  }
+  addEventListener('resize', scale);
+  scale();
+  progressBar.style.width = `${(1 / total) * 100}%`;
+})();
+</script>
+
+</body>
+</html>
